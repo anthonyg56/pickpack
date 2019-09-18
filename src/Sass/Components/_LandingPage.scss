@@ -1,0 +1,158 @@
+.Landing{
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    .Overlay{
+        height: 100%;
+        display: grid;
+        grid-template-rows: 10% 82% 8%;
+        box-shadow: inset 0 0 10px #000000;
+        background-color: rgba(0,0,0,0.4);
+        height: 100%;
+        .Header{
+            height: 100%;
+            display: grid;
+            grid-template-columns: 20% 80%;
+            padding: 20px 30px 0 30px;
+            .Login-Register-Link{
+                a{
+                    font-family: $secondaryFont;
+                    font-size: 30px;
+                    text-decoration: none;
+                    color: $white;
+                    font-weight: 600;
+                }
+                a:hover{
+                    color: $red;
+                }
+            }
+            .Nav{
+                text-align: right;
+                h2{
+                    display: inline;
+                    color: $white;
+                    font-family: $secondaryFont;
+                    font-size: 30px;
+                    letter-spacing: 1px;
+                    margin: 0 20px;
+                }
+                h2:hover{
+                    cursor: pointer;
+                    color: $red;
+                }
+                .Active{
+                    color: $red;
+                    border-bottom: 2px solid $red;
+                }
+            }
+        }
+        .Body{
+            height: 100%;
+            .Section{
+                height: 100%;
+            }
+            #Introduction{
+                display: grid;
+                grid-template-columns: 40% 60%;
+                #Title{
+                    margin: 105px 0 0 155px;
+                    h1{
+                        color: $white;
+                        font-family: $primaryFont;
+                        letter-spacing: 7px;
+                        font-size: 9.5em;
+                        margin: 0;
+                    }
+                    a{
+                        text-decoration: none;
+                        color: $white;
+                        background: $red;
+                        font-family: $secondaryFont;
+                        font-size: 2em;
+                        padding: 15px 20px;
+                        border-radius: 10px;
+                        margin-left: 95px;
+                        letter-spacing: 2px;
+                        font-weight: 600;
+                    }
+                }
+                #Slogan{
+                    text-align: right;
+                    margin: 45px 125px 0 0;
+                    h3{
+                        float: right;
+                        color: $white;
+                        font-size: 2em;
+                        font-family: $secondaryFont;
+                        transform: translateY(265px);
+                        width: 75%;
+                        letter-spacing: 1px;
+                        span{
+                            color: #c7141a;
+                            font-size: 1.75em;
+                            font-family: $primaryFont;
+                            letter-spacing: 2px;
+                        }
+                    }
+                }
+            }
+            #About{
+
+            }
+            #Features{
+
+            }
+            #Design{
+
+            }
+            #Join-Today{
+
+            }
+        }
+        .Footer{
+            height: 100%;
+            display: grid;
+            grid-template-columns: 10% 20% 50% 20%;
+            .Index-Number{
+                height: 100%;
+                h2{
+                    color: $red;
+                    font-family: $primaryFont;
+                    font-size: 45px;
+                    margin: 0 0 0 30px;
+                }
+            }
+            .Social-Media{
+                text-align: center;
+                a{
+                    img{
+                        padding: 10px 15px 0 15px;
+                    }
+                }
+            }
+            .Index-Indicator{
+                text-align: center;
+                img{
+                    padding: 10px 15px 0 15px;
+                }
+            }
+            .Arrows{
+                text-align: right;
+                padding-right: 30px;
+                h2{
+                    color: $white;
+                    display: inline-block;
+                    font-family: $primaryFont;
+                    letter-spacing: 1px;
+                    font-size: 45px;
+                    margin: 0;
+                    font-weight: 500;
+                }
+                img{
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
+}

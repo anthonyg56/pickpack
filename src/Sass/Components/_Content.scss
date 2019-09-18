@@ -1,0 +1,63 @@
+.Content{
+    display: grid;
+    grid-template-columns: 5% 95%;
+    height: 100%;
+    .Nav-Menu{
+        height: 100%;
+        background: $red;
+        .Nav-Menu-Button{
+            padding: 30px 0;
+            img{
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        .Nav-Menu-Items{
+            padding-top: 55px;
+            .Nav-Icon{
+                img{
+                    display: block;
+                    margin: 0 auto;
+                    padding: 25px 0;
+                }
+                p{
+                    padding: 25px 0;
+                }
+            }
+        }
+    }
+    .Content-Body{
+        height: 100%;
+        display: grid;
+        grid-template-rows: 10% 85% 5%;
+        .Header{
+            display: grid;
+            grid-template-columns: 10% 80% 10%;
+            .Search-Bar{
+                text-align: center
+            }
+            .Sub-Nav{
+                text-align: right;
+            }
+            .Icon{
+                text-align: center;
+            }
+        }
+        .Body{
+
+        }
+        .Footer{
+            display: grid;
+            grid-template-columns: 10% 80% 10%;
+            .Social-Media{
+
+            }
+            .Resources{
+
+            }
+            .Title{
+
+            }
+        }
+    }
+}

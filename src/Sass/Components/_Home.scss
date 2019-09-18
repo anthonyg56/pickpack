@@ -1,0 +1,23 @@
+.Home{
+    height: 100%;
+    padding-bottom: 30px;
+    .Section{
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        height: 100%;
+        margin: 0 35px;
+        border-radius: 5px;
+        box-shadow: 5px 5px 8px 2px rgba(0,0,0,1);
+        .Overlay{
+            box-shadow: inset 0 0 10px #000000;
+            background-color: rgba(0,0,0,0.4);
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+        }
+    }
+    #Introduction{
+        
+    }
+}

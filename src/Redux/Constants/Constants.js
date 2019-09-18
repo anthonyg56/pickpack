@@ -1,0 +1,6 @@
+export const CHANGE_SUB_NAV = "CHANGE_SUB_NAV";
+export const CHANGE_NAV_BAR = "CHANGE_NAV_BAR";
+export const CHANGE_TITLE = "CHANGE_TITLE";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const USER_LOADING = "USER_LOADING";
+export const GET_ERRORS = "GET_ERRORS";
