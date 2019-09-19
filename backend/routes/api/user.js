@@ -1,23 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const RateLimit = require('express-rate-limit');
-const stringCapitalizeName = require('string-capitalize-name');
+const RateLimit = require("express-rate-limit");
+const stringCapitalizeName = require("string-capitalize-name");
 const bcrypt = require("bcryptjs");
 
 const User = require("../../models/user");
 
+const minutes = 5;
 const postLimiter = new RateLimit({
-    windowMs: minutes * 60 * 1000, // milliseconds
-    max: 100, // Limit each IP to 100 requests per windowMs 
-    delayMs: 0, // Disable delaying - full speed until the max limit is reached 
-    handler: (req, res) => {
-      res.status(429).json({ success: false, msg: `You made too many requests. Please try again after ${minutes} minutes.` });
-    }
+  windowMs: minutes * 60 * 1000, // milliseconds
+  max: 100, // Limit each IP to 100 requests per windowMs
+  delayMs: 0, // Disable delaying - full speed until the max limit is reached
+  handler: (req, res) => {
+    res
+      .status(429)
+      .json({
+        success: false,
+        msg: `You made too many requests. Please try again after ${minutes} minutes.`
+      });
+  }
 });
 
 // Minor sanitizing to be invoked before reaching the database
 const sanitizeName = name => stringCapitalizeName(name);
-  
+
 const sanitizeEmail = email => email.toLowerCase();
 
 // READ (ONE)
@@ -45,81 +51,81 @@ router.get("/dashboard/", (req, res) => {
 });
 
 router.post("/register", postLimiter, (req, res) => {
+  User.findOne({ email: req.body.email }).then(user => {
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" });
+    } else {
+      let newUser = new User({
+        name: sanitizeName(req.body.name),
+        email: sanitizeEmail(req.body.email),
+        password: req.body.password,
+        userName: req.body.userName
+      });
 
-    User.findOne({ email: req.body.email }).then(user => {
-        if (user) {
-          return res.status(400).json({ email: "Email already exists" });
-        } else {
-        
-        let newUser = new User({
-            name: sanitizeName(req.body.name),
-            email: sanitizeEmail(req.body.email),
-            password: reg.body.password,
-            userName: reg.body.userName
-        });
-
-        newUser
-            .save()
-            .then(result => {
-                // Hash password before saving in database
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err;
-                newUser.password = hash;
-                newUser
-                    .save()
-                    .then(user => res.json(user))
-                    .catch(err => console.log(err));
-                });
+      newUser.save()
+        .then(result => {
+          // Hash password before saving in database
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+              newUser
+                .save()
+                .then(user => console.log(res.json(user)))
+                .catch(err => console.log(err));
             });
+          });
 
-            res.json({
-                success: true,
-                msg: `Successfully added!`,
-                result: {
-                _id: result._id,
-                name: result.name,
-                email: result.email,
-                password: result.password,
-                userName: result.userName
-                }
-            });
-        }).catch(err => {
-            if (err.errors) {
-                if (err.errors.name) {
-                res
-                    .status(400)
-                    .json({ success: false, msg: err.errors.name.message });
-                return;
-                }
-                if (err.errors.email) {
-                res
-                    .status(400)
-                    .json({ success: false, msg: err.errors.email.message });
-                return;
-                }
-                if (err.errors.password) {
-                res.status(400).json({ success: false, msg: err.errors.password.message });
-                return;
-                }
-                if (err.errors.userName) {
-                res
-                    .status(400)
-                    .json({ success: false, msg: err.errors.userName.message });
-                return;
-                }
-                // Show failed if all else fails for some reasons
-                res
-                .status(500)
-                .json({ success: false, msg: `Something went wrong. ${err}` });
+          res.json({
+            success: true,
+            msg: `Successfully added!`,
+            result: {
+              _id: result._id,
+              name: result.name,
+              email: result.email,
+              password: result.password,
+              userName: result.userName
             }
-            });
-        }
+          });
+        })
+        .catch(err => {
+          if (err.errors) {
+            if (err.errors.name) {
+              res
+                .status(400)
+                .json({ success: false, msg: err.errors.name.message });
+              return;
+            }
+            if (err.errors.email) {
+              res
+                .status(400)
+                .json({ success: false, msg: err.errors.email.message });
+              return;
+            }
+            if (err.errors.password) {
+              res
+                .status(400)
+                .json({ success: false, msg: err.errors.password.message });
+              return;
+            }
+            if (err.errors.userName) {
+              res
+                .status(400)
+                .json({ success: false, msg: err.errors.userName.message });
+              return;
+            }
+            // Show failed if all else fails for some reasons
+            res
+              .status(500)
+              .json({ success: false, msg: `Something went wrong. ${err}` });
+          }
+        });
+    }
+  });
 });
 
 // UPDATE
 router.put("/dashboard/:id", (req, res) => {
-
   let updatedUser = {
     name: sanitizeName(req.body.name),
     email: sanitizeEmail(req.body.email),
@@ -168,7 +174,9 @@ router.put("/dashboard/:id", (req, res) => {
           return;
         }
         if (err.errors.password) {
-          res.status(400).json({ success: false, msg: err.errors.password.message });
+          res
+            .status(400)
+            .json({ success: false, msg: err.errors.password.message });
           return;
         }
         if (err.errors.gender) {
