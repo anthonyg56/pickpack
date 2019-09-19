@@ -23,12 +23,12 @@ import DotFilled from '../../Img/Icons/Landing/Footer/dot.png';
 import RightArrow from '../../Img/Icons/Landing/Footer/right-arrow.png';
 import LeftArrow from '../../Img/Icons/Landing/Footer/left-arrow.png';
 
-const Introduction = () => 
+const Introduction = props => 
     <div className="Section" id="Introduction">
         <div id="Title">
             <h1 style={{transform: "translateY(45px)"}}>Pick</h1>
             <h1 style={{paddingLeft: "40px", marginBottom: "10px"}}>Pack</h1>
-            <NavLink to="/about" style={{transform: "translateY(65px)"}}>Learn More</NavLink>
+            <h2>Learn More</h2>
         </div>
         <div id="Slogan">
             <h3>An online community where <span style={{color: "#ea2340", fontSize: "1.75em"}}>PICKS</span> are shared with the <span style={{color: "#ea2340", fontSize: "1.75em"}}>PACK</span></h3>
