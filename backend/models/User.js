@@ -50,13 +50,13 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         validate: emailValidator
     },
-    Password: {
+    password: {
         type: String,
         required: [true, 'Password is required'],
         unique: true,
         validate: PasswordValidator
     },
-    UserName: {
+    userName: {
         type: String,
         required: [true, 'Password is required'],
         unique: true,

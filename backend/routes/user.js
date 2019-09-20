@@ -4,7 +4,7 @@ const RateLimit = require("express-rate-limit");
 const stringCapitalizeName = require("string-capitalize-name");
 const bcrypt = require("bcryptjs");
 
-const User = require("../../models/user");
+const User = require("../models/user");
 
 const minutes = 5;
 const postLimiter = new RateLimit({
@@ -38,7 +38,7 @@ router.get("/dashboard/:id", (req, res) => {
 });
 
 // READ (ALL)
-router.get("/dashboard/", (req, res) => {
+router.get("/dashboard", (req, res) => {
   User.find({})
     .then(result => {
       res.json(result);
@@ -61,7 +61,6 @@ router.post("/register", postLimiter, (req, res) => {
         password: req.body.password,
         userName: req.body.userName
       });
-
       newUser.save()
         .then(result => {
           // Hash password before saving in database
