@@ -18,7 +18,7 @@ export const changeTitle = payload => {
 export const registerUser = (userData, history) => dispatch => {
     axios
       .post("http://localhost:5000/api/register", userData)
-      .then(res => history.push("/login")) // re-direct to login on successful register
+      .then(res => history.push("/auth/login")) // re-direct to login on successful register
       .catch(err =>
         dispatch({
           type: GET_ERRORS,

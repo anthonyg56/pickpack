@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const RateLimit = require("express-rate-limit");
 const stringCapitalizeName = require("string-capitalize-name");
-const bcrypt = require("bcryptjs");
 
-const User = require("../models/user");
+const userCtrl = require("../controllers/user.controller");
+const authCtrl = require("../controllers/user.controller");
 
 const minutes = 5;
 const postLimiter = new RateLimit({
@@ -20,6 +20,25 @@ const postLimiter = new RateLimit({
       });
   }
 });
+
+router.route('/api/users')
+  .get(userCtrl.list)
+  
+
+router.route('/api/register')
+  .post(userCtrl.register)
+
+router.route('/api/users/:userId')
+  .get(authCtrl.requireSignin, userCtrl.read)
+  .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
+  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove)
+
+router.param('userId', userCtrl.userByID)
+
+export default router
+
+/*
+
 
 // Minor sanitizing to be invoked before reaching the database
 const sanitizeName = name => stringCapitalizeName(name);
@@ -214,3 +233,4 @@ router.delete("/dashboard/:id", (req, res) => {
 });
 
 module.exports = router;
+*/
