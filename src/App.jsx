@@ -17,7 +17,7 @@ class App extends React.Component {
       <div className="App">
         <Route exact path="/" render={props => this.LandingPage(props)} />
         <Route path="/auth/:id" render={props => this.Auth(props)} />
-        <PrivateRoute path='/dashboard' render={props => this.Content(props)} />
+        <PrivateRoute path='/dashboard' Component={props => this.Content(props)} />
       </div>
     );
   }

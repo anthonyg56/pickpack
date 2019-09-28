@@ -3,7 +3,7 @@ const helmet = require("helmet");
 const express = require('express');
 const bodyParser = require("body-parser");
 const compression = require("compression");
-const userRouter = require("./routes/user");
+const userRouter = require("./routes/user.routes");
 const cookieParser = require("cookie-parser");
 const authRouter = require('./routes/auth.routes');
 
@@ -27,6 +27,7 @@ app.use((err, req, res, next) => {
       res.status(401).json({"error" : err.name + ": " + err.message})
     }
 });
+
 /* CORS Header
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -34,4 +35,4 @@ app.use((req, res, next) => {
     next();
 });*/
 
-export default app;
+module.exports = app;

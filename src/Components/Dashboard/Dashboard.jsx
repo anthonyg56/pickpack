@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeSubNav, changeTitle } from "../../Redux/Actions/Actions";
-import { Introduction, SubNav } from './HomeData';
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -10,19 +9,19 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-class Home extends React.Component {
+class Dashboard extends React.Component {
     componentWillMount = () => {
         this.props.changeSubNav(<SubNav />);
-        this.props.changeTitle("Home");
+        this.props.changeTitle("My Dashboard");
     }
 
     render(){
         return(
-            <div className="Home">
-                <Introduction />
+            <div className="Dashboard">
+                
             </div>
         );
     }
 }
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Dashboard);

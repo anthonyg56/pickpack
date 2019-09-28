@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import app from './express';
+const app = require('./express.js');
+const mongoose = require('mongoose');
 
 // DB Config File
 const db = require("./config/keys.js").mongoUri;

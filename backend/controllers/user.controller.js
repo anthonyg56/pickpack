@@ -1,6 +1,6 @@
-import User from '../models/user.model'
-import _ from 'lodash'
-import errorHandler from '../helpers/dbErrorHandler'
+const _ = require('lodash');
+const User = require('../models/user.model');
+const errorHandler = require('../helpers/error.helper');
 
 const register = (req, res, next) => { 
     User.findOne({ email: req.body.email })
@@ -74,4 +74,4 @@ const remove = (req, res, next) => {
     })
 };
 
-export default { register, userByID, read, list, remove, update }
+module.exports = { register, userByID, read, list, remove, update }

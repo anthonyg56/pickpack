@@ -1,7 +1,7 @@
-import User from '../models/user.model'
-import jwt from 'jsonwebtoken'
-import expressJwt from 'express-jwt'
-import config from '../../config/config'
+const User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
+const config = require('../config/keys');
 
 const signin = (req, res) => {
     User.findOne({
@@ -20,7 +20,7 @@ const signin = (req, res) => {
   
       const token = jwt.sign({
         _id: user._id
-      }, config.jwtSecret)
+      }, config.secretOrPrivateKey)
   
       res.cookie("t", token, {
         expire: new Date() + 9999
@@ -41,9 +41,9 @@ const signin = (req, res) => {
   }
 
   const requireSignin = expressJwt({
-    secret: config.jwtSecret,
-    userProperty: 'auth'
-  })
+                          secret: config.secretOrPrivateKey,
+                          userProperty: 'auth'
+                        })
 
   const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id == 
@@ -56,5 +56,5 @@ const signin = (req, res) => {
     next()
   }
 
-  export default { signin, signout, requireSignin, hasAuthorization }
+  module.exports = { signin, signout, requireSignin, hasAuthorization }
 
