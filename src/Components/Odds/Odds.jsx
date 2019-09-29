@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Sports extends React.Component {
+class Odds extends React.Component {
 
     render(){
         return(
@@ -11,4 +11,4 @@ class Sports extends React.Component {
     }
 }
 
-export default Sports;
+export default Odds;
