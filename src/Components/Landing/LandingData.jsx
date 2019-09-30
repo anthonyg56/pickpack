@@ -31,7 +31,7 @@ const Introduction = props =>
             <h2>Learn More</h2>
         </div>
         <div id="Slogan">
-            <h3>An online community where <span style={{color: "#ea2340", fontSize: "1.75em"}}>PICKS</span> are shared with the <span style={{color: "#ea2340", fontSize: "1.75em"}}>PACK</span></h3>
+            <h3>An online community where <span style={{color: "#c7141a", fontSize: "1.75em"}}>PICKS</span> are shared with the <span style={{color: "#c7141a", fontSize: "1.75em"}}>PACK</span></h3>
         </div>
     </div>
 

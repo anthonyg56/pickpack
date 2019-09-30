@@ -4,5 +4,51 @@
         height: 100%;
         overflow: hidden;
         display: fixed;
+        .Content{
+            height: 100%;
+            display: grid;
+            grid-template-columns: 5% 95%;
+            .Nav-Menu{
+                text-align: center;
+                .Nav-Menu-Button{
+                    padding: 25px 0;
+                }
+                .Nav-Menu-Items{
+                    padding-top: 125px;
+                    .Nav-Icon{
+                        display: block;
+                        padding: 15px 0;
+                        img{
+
+                        }
+                    }
+                }
+            }
+            .Content-Body{
+                background: $beige;
+                display: grid;
+                grid-template-rows: 8% 87% 5%;
+                .Header{
+                    display: grid;
+                    grid-template-columns: 20% 70% 10%;
+                    .Search-Bar{
+                        text-align: center;
+                        padding-top: 30px;
+                    }
+                    .Sub-Nav{
+
+                    }
+                    .Icon{
+
+                    }
+                }
+                .Body{
+
+                }
+                .Footer{
+
+                }
+            }
+        }
     }
 }

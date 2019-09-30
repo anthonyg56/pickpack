@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotificationBar = () => {
+const NotificationBar = props => {
 
     return (
         <div className="Notification-Bar">
@@ -9,11 +9,16 @@ const NotificationBar = () => {
     )
 }
 
-const NotificationItem = () => {
+const NotificationItem = props => {
 
     return (
         <div className="Notification-Item">
-        
+            <div className="Title">
+                <h4>{props.titles}</h4>
+            </div>
+            <div className="Notification">
+                <p>{props.text}</p>
+            </div>
         </div>
     )
 }
@@ -54,10 +59,10 @@ const MyProfile = () => {
     )
 }
 
-const ViewTimeLine = () => {
+const MyStats = () => {
 
     return (
-        <div className="View-Time-Line">
+        <div className="My-Stats">
         
         </div>
     )
@@ -82,4 +87,4 @@ const SubmitNewPick = () => {
 }
 
 
-export default { NotificationBar, NotificationItem, ListOfPicks, PickItem, QuickGraph, MyProfile, ViewTimeLine, CreatePost, SubmitNewPick };
+export default { NotificationBar, NotificationItem, ListOfPicks, PickItem, QuickGraph, MyProfile, MyStats, CreatePost, SubmitNewPick };

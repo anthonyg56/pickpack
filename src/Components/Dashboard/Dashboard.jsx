@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => {
 
 class Dashboard extends React.Component {
     componentWillMount = () => {
-        this.props.changeSubNav(<SubNav />);
         this.props.changeTitle("My Dashboard");
     }
 

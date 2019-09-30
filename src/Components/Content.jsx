@@ -3,12 +3,12 @@ import Header from './Misc/Header';
 import Footer from './Misc/Footer';
 import NavMenu from './Misc/NavMenu';
 import { Switch, Route } from 'react-router-dom';
-import Profile from '../Profile/Profile';
+import Profile from './Profile/Profile';
 import Dashboard from './Dashboard/Dashboard';
-import Odds from '../Odds/Odds';
-import Community from '../Community/Community';
-import Premium from '../Premium/Premium';
-import About from '../About/About';
+import Odds from './Odds/Odds';
+import Community from './Community/Community';
+import Premium from './Premium/Premium';
+import About from './About/About';
 
 const Body = () => 
     <div className="Body">
