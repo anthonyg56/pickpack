@@ -8,7 +8,11 @@ const register = (req, res, next) => {
             if (user) {
                 return res.status(400).json({ email: "Email already exists" });
             } else {
-                const user = new User(req.body);
+                const user = new User({
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password
+                });
                 user.save()
             }
         })

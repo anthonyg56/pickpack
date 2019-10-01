@@ -1,6 +1,22 @@
 const Post = require('../models/post.model');
 const errorHandler = require('../helpers/error.helper');
 
+const create = (req, res, next) => {
+  let post = new Post({
+    text: req.body.text,
+    postedBy: req.profile
+  })
+  console.log(post)
+  post.save((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result)
+  })
+}
+
 const postByID = (req, res, next, id) => { 
     Post.findById(id).exec((err, post) => {
         if (err || !post)
@@ -123,7 +139,8 @@ const isPoster = (req, res, next) => {
     next()
 };
 
-export default { 
+module.exports = { 
+    create,
     postByID, 
     listByUser, 
     listNewsFeed, 

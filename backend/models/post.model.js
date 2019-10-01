@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema();
 
-const postSchema = new Schema({
+const PostSchema = new mongoose.Schema({
     text: {
         type: String,
         required: 'Name is required'
@@ -11,7 +10,7 @@ const postSchema = new Schema({
         contentType: String
     },
     likes: [{
-        type: Schema.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: 'User'
     }],
     comments: [{
@@ -21,12 +20,12 @@ const postSchema = new Schema({
             default: Date.now 
         },
         postedBy: { 
-            type: Schema.ObjectId, 
+            type: mongoose.Schema.ObjectId, 
             ref: 'User'
         }
     }],
     postedBy: {
-        type: Schema.ObjectId, 
+        type: mongoose.Schema.ObjectId, 
         ref: 'User'
     },
     created: {
@@ -35,5 +34,5 @@ const postSchema = new Schema({
     }
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', PostSchema);
 module.exports = Post;

@@ -34,20 +34,20 @@ export const loginUser = userData => dispatch => {
     .then(res => {
         // Save to localStorage
         // Set token to localStorage
+        console.log(res.data)
         const { token } = res.data;
+        sessionStorage.setItem('jwt', JSON.stringify(res.data))
         // Set token to Auth header
         setAuthToken(token);
-        // Decode token to get user data
-        const decoded = jwt_decode(token);
         // Set current user
-        dispatch(setCurrentUser(decoded));
+        dispatch(setCurrentUser(res.data.user))
     })
-    .catch(err =>
-        dispatch({
+    .catch(err => console.log(err))
+        /*dispatch({
           type: GET_ERRORS,
           payload: err.response.data
         })
-    );
+    );*/
 };
 
 // Set logged in user

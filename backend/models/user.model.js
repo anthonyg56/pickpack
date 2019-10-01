@@ -14,20 +14,6 @@ const UserSchema = new mongoose.Schema({
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required: 'Email is required'
     },
-    profileName: {
-      type: String,
-      trim: true,
-      required: "Profile Name Is Required"
-    },
-    birthday: {
-      type: Date,
-      trim: true,
-      required: "Birthday is required"
-    },
-    bio: {
-      type: String,
-      trim: true
-    },
     created: {
         type: Date,
         default: Date.now
@@ -37,17 +23,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: "Password is required"
     },
-    followers: [{
-      type: mongoose.Schema.ObjectId,
-      ref: 'User'
-    }],
-    followings: [{
-      type: mongoose.Schema.ObjectId,
-      ref: 'User'
-    }],
-    salt: String,
-    favoriteTeams: [ String ],
-    favoriteSport: [ String ]
+    salt: String
 });
 
 UserSchema

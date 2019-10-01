@@ -13,7 +13,7 @@ import About from './About/About';
 const Body = () => 
     <div className="Body">
         <Switch>
-            <Route path="/dashboard" render={props => <Dashboard {...props} />} />
+            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route path="/dashboard/myprofile" render={props => <Profile {...props} />} />
             <Route path="/dashboard/odds" render={props => <Odds {...props} />} />
             <Route path="/dashboard/community" render={props => <Community {...props} />} />

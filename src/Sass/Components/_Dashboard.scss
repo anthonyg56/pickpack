@@ -1,0 +1,47 @@
+.Dashboard{
+    display: grid;
+    grid-template-columns: 85% 15%;
+    height: 100%;
+    padding: 0px 40px;
+    .Dashboard-Left{
+        display: grid;
+        grid-template-rows: 40% 60%;
+        .Dashboard-Left-Top{
+            display: grid;
+            grid-template-columns: 50% 50%;
+            .Pick-List{
+                margin: 20px;
+                border-radius: 10px;
+                background: $white;
+                box-shadow: 0 0 5px 1px #8a795d;
+            }
+            .Quick-Links{
+                margin: 20px;
+                border-radius: 10px;
+                background: $white;
+                box-shadow: 0 0 5px 1px #8a795d;
+            }
+        }
+        .Dashboard-Left-Bottom{
+            padding: 20px;
+            .Quick-Graph{
+                height: 100%;
+                border-radius: 10px;
+                background: $white;
+                box-shadow: 0 0 5px 1px #8a795d;
+            }
+        }
+    }
+    .Dashboard-Right{
+        padding: 20px;
+        .Notification-Bar{
+            height: 100%;
+            border-radius: 10px;
+            background: $white;
+            box-shadow: 0 0 5px 1px #8a795d;
+            h1{
+                margin: 0;
+            }
+        }
+    }
+}

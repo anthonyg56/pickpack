@@ -1,15 +1,15 @@
 import React from 'react';
 
-const NotificationBar = props => {
+export const Notifications = props => {
 
     return (
         <div className="Notification-Bar">
-        
+            
         </div>
     )
 }
 
-const NotificationItem = props => {
+export const NotificationItem = props => {
 
     return (
         <div className="Notification-Item">
@@ -23,16 +23,16 @@ const NotificationItem = props => {
     )
 }
 
-const ListOfPicks = () => {
+export const PickList = () => {
 
     return (
-        <div className="List-Of-Picks">
+        <div className="Pick-List">
         
         </div>
     )
 }
 
-const PickItem = () => {
+export const PickItem = () => {
 
     return (
         <div className="Pick-Item">
@@ -41,16 +41,16 @@ const PickItem = () => {
     )
 }
 
-const QuickGraph = () => {
+export const QuickGraph = () => {
 
     return (
         <div className="Quick-Graph">
-        
+            
         </div>
     )
 }
 
-const MyProfile = () => {
+export const MyProfile = () => {
 
     return (
         <div className="My-Profile">
@@ -59,7 +59,7 @@ const MyProfile = () => {
     )
 }
 
-const MyStats = () => {
+export const MyStats = () => {
 
     return (
         <div className="My-Stats">
@@ -68,7 +68,7 @@ const MyStats = () => {
     )
 }
 
-const CreatePost = () => {
+export const CreatePost = () => {
 
     return (
         <div className="Create-Post">
@@ -77,7 +77,7 @@ const CreatePost = () => {
     )
 }
 
-const SubmitNewPick = () => {
+export const SubmitNewPick = () => {
 
     return (
         <div className="Submit-New-Pick">
@@ -86,5 +86,11 @@ const SubmitNewPick = () => {
     )
 }
 
+export const QuickLinks = () => {
 
-export default { NotificationBar, NotificationItem, ListOfPicks, PickItem, QuickGraph, MyProfile, MyStats, CreatePost, SubmitNewPick };
+    return (
+        <div className="Quick-Links">
+        
+        </div>
+    )
+}

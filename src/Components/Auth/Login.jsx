@@ -1,34 +1,23 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../Redux/Actions/Actions";
-import classnames from "classnames";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { loginUser } from "../../Redux/Actions/Actions"
+import auth from './AuthHelper'
+import classnames from "classnames"
 
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors
-});
+})
 
 class Login extends Component {
     constructor() {
-    super();
-        this.state = {
+    super()
+    this.state = {
         email: "",
         password: "",
         errors: {}
-        };
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            this.props.history.push("/dashboard"); // push user to dashboard when they login
-        }
-
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
         }
     }
 
@@ -43,9 +32,20 @@ class Login extends Component {
             password: this.state.password
         };
         console.log(userData);
-
         this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
     };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.isAuthenticated) {
+          this.props.history.push("/dashboard");
+        }
+    
+        if (nextProps.errors) {
+          this.setState({
+            errors: nextProps.errors
+          });
+        }
+    }
 
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -128,7 +128,6 @@ class Login extends Component {
 
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 

@@ -15,27 +15,27 @@ import OpenIcon from '../../Img/Icons/Misc/Nav/menu-outline.png';
 
 const NavMenuItems = props => 
     <div className="Nav-Menu-Items">
-        <NavLink to="/profile" activeClassName="Active" className="Nav-Icon" id="Profile">
+        <NavLink to="/dashboard/profile" activeClassName="Active" className="Nav-Icon" id="Profile">
             <img src={ProfileIcon} alt="profile-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>Profile</p>
         </NavLink>
-        <NavLink to="/in-depth-analysis" activeClassName="Active" className="Nav-Icon" id="Analysis">
+        <NavLink to="/dashboard/in-depth-analysis" activeClassName="Active" className="Nav-Icon" id="Analysis">
             <img src={AnalysisIcon} alt="analysis-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>In Depth Analysis</p>
         </NavLink>
-        <NavLink to="/sport" activeClassName="Active" className="Nav-Icon" id="Sports">
+        <NavLink to="/dashboard/sport" activeClassName="Active" className="Nav-Icon" id="Sports">
             <img src={SportIcon} alt="sports-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>Sports</p>
         </NavLink>
-        <NavLink to="/community" activeClassName="Active" className="Nav-Icon" id="Community">
+        <NavLink to="/dashboard/community" activeClassName="Active" className="Nav-Icon" id="Community">
             <img src={CommunityIcon} alt="community-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>Community</p>
         </NavLink>
-        <NavLink to="/premium" activeClassName="Active" className="Nav-Icon" id="Premium">
+        <NavLink to="/dashboard/premium" activeClassName="Active" className="Nav-Icon" id="Premium">
             <img src={PremiumIcon} alt="premium-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>Premium</p>
         </NavLink>
-        <NavLink to="/about" activeClassName="Active" className="Nav-Icon" id="About">
+        <NavLink to="/dashboard/about" activeClassName="Active" className="Nav-Icon" id="About">
             <img src={AboutIcon} alt="about-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>About</p>
         </NavLink>

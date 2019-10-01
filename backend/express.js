@@ -6,6 +6,7 @@ const compression = require("compression");
 const userRouter = require("./routes/user.routes");
 const cookieParser = require("cookie-parser");
 const authRouter = require('./routes/auth.routes');
+const postRouter = require('./routes/post.routes');
 
 // Express Setup
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors());
 //Routers
 app.use('/', userRouter);
 app.use('/', authRouter);
+app.use('/', postRouter);
 
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
