@@ -1,26 +1,9 @@
 import React, { Component } from "react"
-import { Link, withRouter } from "react-router-dom"
+import RegisterUser from './AuthComponents'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import PropTypes from "prop-types"
-import { registerUser } from "../../Redux/Actions/AuthActions"
-import UserRegistration from './RegisterData'
-import classnames from "classnames"
-
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-});
 
 class Register extends Component {
-  
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.errors) {
-          this.setState({
-            errors: nextProps.errors
-          });
-        }
-    }
-
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
@@ -29,10 +12,9 @@ class Register extends Component {
     }
 
     render() {
-        //const { errors } = this.state;
     return (
         <div className="container">
-            <UserRegistration history={this.props.history} />
+            <RegisterUser history={this.props.history} />
             {/*<div className="">
             <div className="">
                 <Link to="/" className="">Back to home</Link>
@@ -133,13 +115,14 @@ class Register extends Component {
     }
 }
 
-Register.propTypes = {
-    registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-};
+const mapStateToProps = state => ({
+    auth: state.auth,
+    error: state.errors
+})
 
-export default connect(
-    mapStateToProps,
-    { registerUser }
-  )(withRouter(Register));
+Register.propTypes = {
+    auth: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired
+}
+
+export default connect(mapStateToProps)(Register);

@@ -1,0 +1,13 @@
+const DELETE_LIKE_COMMENT = "DELETE_LIKE_COMMENT"
+const DELETE_LIKE_POST = "DELETE_LIKE_POST"
+const DELETE_COMMENT = "DELETE_COMMENT"
+const DELETE_POST = "DELETE_POST"
+
+const Delete = {
+    likeComment: DELETE_LIKE_COMMENT,
+    likePost: DELETE_LIKE_POST,
+    comment: DELETE_COMMENT,
+    post: DELETE_POST
+}
+
+export default Delete

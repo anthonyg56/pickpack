@@ -1,4 +1,4 @@
-import { CHANGE_SUB_NAV, CHANGE_NAV_BAR, CHANGE_TITLE } from "../Constants/Constants";
+import Constants from "../Constants/Constants";
 
 const initialState = {
     IsNavOpen: false,
@@ -7,19 +7,19 @@ const initialState = {
 };
 
 function changeReducer(state = initialState, action) {
-    if (action.type === CHANGE_SUB_NAV){
+    if (action.type === Constants.update.subNav){
         return Object.assign({}, state, {
             SubNav: action.payload
         });
     }
 
-    if (action.type === CHANGE_NAV_BAR){
+    if (action.type === Constants.update.navBar){
         return Object.assign({}, state, {
             IsNavOpen: action.payload
         });
     }
 
-    if (action.type === CHANGE_TITLE){
+    if (action.type === Constants.update.title){
         return Object.assign({}, state, {
             SubNav: action.payload
         });

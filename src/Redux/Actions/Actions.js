@@ -1,16 +1,28 @@
-import { CHANGE_SUB_NAV, CHANGE_NAV_BAR, CHANGE_TITLE, GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from '../Constants/Constants';
-import axios from "axios";
-import jwt_decode from "jwt-decode";
-import setAuthToken from "../../Utils/SetAuthToken";
+import Constants from '../Constants/Constants';
 
-export const changeSubNav = payload => {
-    return { type: CHANGE_SUB_NAV, payload}
+const updateSubNav = payload => {
+    return { 
+        type: Constants.update.subNav, 
+        payload
+    }
 }
 
-export const changeNavBar = payload => {
-    return { type: CHANGE_NAV_BAR, payload}
+const updateNavBar = payload => {
+    return { 
+        type: Constants.update.navBar, 
+        payload
+    }
 }
 
-export const changeTitle = payload => {
-    return { type: CHANGE_TITLE, payload}
+const updateTitle = payload => {
+    return { 
+        type: Constants.update.title, 
+        payload
+    }
+}
+
+export {
+    updateNavBar,
+    updateSubNav,
+    updateTitle
 }

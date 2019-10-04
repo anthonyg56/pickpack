@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeSubNav, changeTitle } from "../../Redux/Actions/Actions";
+import { updateSubNav, updateTitle } from "../../Redux/Actions/Actions";
 import { Notifications, PickList, QuickGraph, QuickLinks } from './DashboardComponents'
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeSubNav: subNav => dispatch(changeSubNav(subNav)),
-        changeTitle: title => dispatch(changeTitle(title))
+        updateSubNav: subNav => dispatch(updateSubNav(subNav)),
+        updateTitle: title => dispatch(updateTitle(title))
     };
 }
 
 class Dashboard extends React.Component {
     componentWillMount = () => {
-        this.props.changeTitle("My Dashboard");
+        this.props.updateTitle("My Dashboard");
     }
 
     render(){

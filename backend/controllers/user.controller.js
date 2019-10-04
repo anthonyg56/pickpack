@@ -14,11 +14,11 @@ const register = (req, res, next) => {
                     email: req.body.email,
                     password: req.body.password
                 });
-                user.save()
+                user.save().then(user => res.json(user)).catch(err => console.log(err))
             }
         })
-        .then(() => res.status(200).json({ message: "Successfully signed up!" }))
-        .catch(err => { res.status(400).json({ error: errorHandler.getErrorMessage(err) }) })
+        /*.then(res => res.status(200).json({ message: "Successfully signed up!" }))
+        .catch(err => { res.status(400).json({ error: errorHandler.getErrorMessage(err) }) })*/
 };
 
 const list = (req, res) => { 

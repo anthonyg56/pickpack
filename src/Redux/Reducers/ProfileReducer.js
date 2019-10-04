@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_LIKES, GET_PICKS } from "../Constants/Constants";
+import Constants from "../Constants/Constants";
 
 const initialState = {
     posts: [],
@@ -8,17 +8,17 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-      case GET_POSTS:
+      case Constants.get.posts:
         return {
           ...state,
           posts: action.payload
         };
-      case GET_LIKES:
+      case Constants.get.picks:
         return {
           ...state,
           picks: action.payload
         };
-    case GET_PICKS:
+    case Constants.get.likes:
         return {
           ...state,
           likes: action.payload

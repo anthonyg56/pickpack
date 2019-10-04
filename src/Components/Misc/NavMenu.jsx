@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {changeNavBar} from '../../Redux/Actions/Actions';
+import {updateNavBar} from '../../Redux/Actions/Actions';
 
 import ProfileIcon from '../../Img/Icons/Misc/Nav/profile.png';
 import AnalysisIcon from '../../Img/Icons/Misc/Nav/graph.png';
@@ -51,10 +51,10 @@ const NavButton = props =>{
 }
     
 
-const NavMenu = ({ NavOpen, changeNavBar }) => {
+const NavMenu = ({ NavOpen, updateNavBar }) => {
     return(
         <div className="Nav-Menu">
-            <NavButton change={flip => changeNavBar(flip)} isOpen={NavOpen} />
+            <NavButton change={flip => updateNavBar(flip)} isOpen={NavOpen} />
             <NavMenuItems isOpen={NavOpen} />
         </div>
     )
@@ -62,7 +62,7 @@ const NavMenu = ({ NavOpen, changeNavBar }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      changeNavBar: navBar => dispatch(changeNavBar(navBar))
+      updateNavBar: navBar => dispatch(updateNavBar(navBar))
     };
 }
 

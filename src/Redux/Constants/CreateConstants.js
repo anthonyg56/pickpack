@@ -1,0 +1,13 @@
+const CREATE_LIKE_COMMENT = "CREATE_LIKE_COMMENT"
+const CREATE_LIKE_POST = "CREATE_LIKE_POST"
+const CREATE_COMMENT = "CREATE_COMMENT"
+const CREATE_POST = "CREATE_POST"
+
+const Create = {
+    likeComment: CREATE_LIKE_COMMENT,
+    likePost: CREATE_LIKE_POST,
+    comment: CREATE_COMMENT,
+    post: CREATE_POST
+}
+
+export default Create

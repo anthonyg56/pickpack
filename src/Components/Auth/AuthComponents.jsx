@@ -5,7 +5,7 @@ import { Link, withRouter } from "react-router-dom"
 import { registerUser, loginUser, logoutUser } from '../../Redux/Actions/AuthActions'
 import { connect } from 'react-redux'
 
-const UserRegistration = ({...props}) => {
+const RegisterUser = props => {
     let initialState = {
         name: "",
         userName: "",
@@ -42,7 +42,7 @@ const UserRegistration = ({...props}) => {
                         })
                     } 
                 />
-                <label htmlFor="name"> User Name</label>
+                <label htmlFor="userName"> User Name</label>
                 <input 
                     name="userName" 
                     ref={
@@ -55,7 +55,7 @@ const UserRegistration = ({...props}) => {
                         })
                     } 
                 />
-                <label htmlFor="name"> Email</label>
+                <label htmlFor="email"> Email</label>
                 <input 
                     name="email" 
                     ref={
@@ -68,7 +68,7 @@ const UserRegistration = ({...props}) => {
                         })
                     }
                 />
-                <label htmlFor="name"> Password</label>
+                <label htmlFor="password"> Password</label>
                 <input 
                     name="password" 
                     ref={
@@ -85,7 +85,7 @@ const UserRegistration = ({...props}) => {
                         })
                     }
                 />
-                <label htmlFor="name"> Validate Password</label>
+                <label htmlFor="password2"> Validate Password</label>
                 <input 
                     name="password2" 
                     ref={
@@ -110,4 +110,8 @@ const UserRegistration = ({...props}) => {
     )
 }
 
-export default connect( null, { registerUser })(UserRegistration)
+const RegisterProfile = props => {
+
+}
+
+export default connect( null, { registerUser })(withRouter(RegisterUser))

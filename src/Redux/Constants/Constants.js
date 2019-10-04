@@ -1,20 +1,13 @@
-export const CHANGE_SUB_NAV = "CHANGE_SUB_NAV";
-export const CHANGE_NAV_BAR = "CHANGE_NAV_BAR";
-export const CHANGE_TITLE = "CHANGE_TITLE";
-export const SET_CURRENT_USER = "SET_CURRENT_USER";
-export const USER_LOADING = "USER_LOADING";
-export const GET_ERRORS = "GET_ERRORS";
-export const CREATE_POST = "CREATE_POST";
-export const DELETE_POST = "DELETE_POST";
-export const CREATE_COMMENT = "CREATE_COMMENT";
-export const DELETE_COMMENT = "DELETE_COMMENT";
-export const LIKE_POST = "LIKE_POST";
-export const UNLIKE_POST = "UNLIKE_POST";
-export const LIKE_COMMENT = "LIKE_COMMENT";
-export const UNLIKE_COMMENT = "UNLIKE_COMMENT";
-export const FIND_COMMENT = "FIND_COMMENT";
-export const FIND_POST = "FIND_POST";
-export const TIMELINE = "TIMELINE";
-export const GET_POSTS = "GET_POSTS";
-export const GET_LIKES = "GET_LIKES";
-export const GET_PICKS = "GET_PICKS";
+import Update from './UpdateConstants'
+import Delete from './DeleteConstant'
+import Create from './CreateConstants'
+import Get from './GetConstants'
+
+const Constants = {
+    update: Update,
+    delete: Delete,
+    create: Create,
+    get: Get
+}
+
+export default Constants
