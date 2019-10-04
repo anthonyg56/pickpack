@@ -14,7 +14,7 @@ const Body = () =>
     <div className="Body">
         <Switch>
             <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
-            <Route path="/dashboard/myprofile" render={props => <Profile {...props} />} />
+            <Route path="/dashboard/profile" render={props => <Profile {...props} />} />
             <Route path="/dashboard/odds" render={props => <Odds {...props} />} />
             <Route path="/dashboard/community" render={props => <Community {...props} />} />
             <Route path="/dashboard/premium" render={props => <Premium {...props} />} />

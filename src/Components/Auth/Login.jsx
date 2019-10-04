@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { loginUser } from "../../Redux/Actions/Actions"
+import { loginUser } from "../../Redux/Actions/AuthActions"
 import auth from './AuthHelper'
 import classnames from "classnames"
 
@@ -36,7 +36,7 @@ class Login extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
+        if (auth.isAuthenticated()) {
           this.props.history.push("/dashboard");
         }
     
@@ -48,6 +48,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        const isAuth = auth.isAuthenticated()
         // If logged in and user navigates to Login page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
           this.props.history.push("/dashboard");

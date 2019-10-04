@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
-import PropTypes from "prop-types";
-import { registerUser } from "../../Redux/Actions/Actions";
-import classnames from "classnames";
+import React, { Component } from "react"
+import { Link, withRouter } from "react-router-dom"
+import { connect } from 'react-redux'
+import PropTypes from "prop-types"
+import { registerUser } from "../../Redux/Actions/AuthActions"
+import UserRegistration from './RegisterData'
+import classnames from "classnames"
 
 const mapStateToProps = state => ({
     auth: state.auth,
@@ -11,17 +12,6 @@ const mapStateToProps = state => ({
 });
 
 class Register extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: "",
-            userName: "",
-            email: "",
-            password: "",
-            password2: "",
-            errors: {}
-        };
-    }
   
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
@@ -30,25 +20,6 @@ class Register extends Component {
           });
         }
     }
-    
-    onChange = e => {
-        this.setState({ [e.target.id]: e.target.value });
-    };
-
-    onSubmit = e => {
-        e.preventDefault();
-        const newUser = {
-            name: this.state.name,
-            userName: this.state.userName,
-            email: this.state.email,
-            password: this.state.password,
-            password2: this.state.password2,
-        };
-
-        console.log(newUser);
-
-        this.props.registerUser(newUser, this.props.history); 
-    };
 
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -58,10 +29,11 @@ class Register extends Component {
     }
 
     render() {
-        const { errors } = this.state;
+        //const { errors } = this.state;
     return (
         <div className="container">
-            <div className="">
+            <UserRegistration history={this.props.history} />
+            {/*<div className="">
             <div className="">
                 <Link to="/" className="">Back to home</Link>
                 <div className="" >
@@ -155,7 +127,7 @@ class Register extends Component {
                     </div>
                 </form>
             </div>
-            </div>
+                    </div>*/}
         </div>
         );
     }

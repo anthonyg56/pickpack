@@ -1,13 +1,9 @@
-import React from 'react';
+import React from 'react'
 import useForm from 'react-hook-form'
 import { connect } from 'react-redux'
-import { createPost } from '../../Redux/Actions/PostActions'
+import { createPost, postsByUser } from '../../Redux/Actions/PostActions'
 import auth from '../Auth/AuthHelper'
 import PropTypes from "prop-types"
-
-const mapStateToProps = state => ({
-    auth: state.auth
-})
 
 const NewPost = props => {
     const jwt = auth.isAuthenticated()
@@ -29,11 +25,35 @@ const NewPost = props => {
 }
 
 NewPost.propTypes = {
-    createPost: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    createPost: PropTypes.func.isRequired
 }
 
-export default connect(
-    mapStateToProps,
-    { createPost })
-    (NewPost);
+const Post = props => {
+
+    return(
+        <div className="Post">
+            <div>
+                {/*<img />*/}
+                <h4>{props.userName}</h4>
+            </div>
+            <div>
+                <p>{props.text}</p>
+            </div>
+            {/*<div>
+                //Comments & Likes
+            </div>*/}
+        </div>
+    )
+}
+
+const ListByUser = props => {
+    let posts = {};
+    const jwt = auth.isAuthenticated();
+    props.postsByUser(jwt.user._id, jwt.token)
+    .then(data => posts.feed = data)
+    console.log(posts);
+}
+
+
+export const ConnectedNewPost = connect( null, { createPost })(NewPost);
+export const ConnectedListByUser = connect( null, { postsByUser })(ListByUser);

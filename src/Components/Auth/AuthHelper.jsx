@@ -1,5 +1,5 @@
 import React from 'react'
-import { logoutUser } from '../../Redux/Actions/Actions'
+import { logoutUser } from '../../Redux/Actions/AuthActions'
 
 const auth = {
   isAuthenticated() {

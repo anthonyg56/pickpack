@@ -1,5 +1,5 @@
 import React from 'react'
-import NewPost from './CommunityData'
+import { ConnectedNewPost, ConnectedListByUser } from './CommunityData'
 
 class Community extends React.Component {
 
@@ -7,7 +7,7 @@ class Community extends React.Component {
         return(
             <div>
                 Hello World
-                <NewPost />
+                <ConnectedListByUser />
             </div>
         );
     }

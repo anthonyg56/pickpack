@@ -15,3 +15,6 @@ export const UNLIKE_COMMENT = "UNLIKE_COMMENT";
 export const FIND_COMMENT = "FIND_COMMENT";
 export const FIND_POST = "FIND_POST";
 export const TIMELINE = "TIMELINE";
+export const GET_POSTS = "GET_POSTS";
+export const GET_LIKES = "GET_LIKES";
+export const GET_PICKS = "GET_PICKS";

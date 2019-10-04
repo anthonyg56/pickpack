@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const Schema = mongoose.Schema();
 
 const ProfileSchema = new Schema({
-  profileName: {
+  userName: {
     type: String,
     trim: true,
     required: "Profile Name Is Required"
@@ -30,7 +30,8 @@ const ProfileSchema = new Schema({
     }
   ],
   favoriteTeams: [String],
-  favoriteSport: [String]
+  favoriteSport: [String],
+  likes: [Number]
 });
 
 const Profile = mongoose.model('profile', ProfileSchema);
