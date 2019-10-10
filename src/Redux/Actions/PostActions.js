@@ -2,24 +2,26 @@ import Constants from '../Constants/Constants'
 import axios from "axios"
 
 const createPost = (params, data, token) => dispatch => {
-  axios
+  return axios
   .post('/api/posts/new/' + params.userId, data.post, { headers: {
     'Accept': 'application/json',
     'Authorization': 'Bearer ' + token.t
   }}, {body: data.post})
-  .then((response) => console.log(response.data))
+  .then(response => response.data)
   .catch(err => errors(err.response.data))
 }
 
 const postsByUser = (params, token) => dispatch => {
-  axios
+  return axios
   .get('/api/posts/by/' + params, { headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + token
   }})
   .then(response => {
+    console.log(response.data)
     dispatch(getPosts(response.data))
+    return response.data
   })
   .catch(err =>
     dispatch({

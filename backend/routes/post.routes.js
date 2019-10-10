@@ -3,17 +3,18 @@ const router = express.Router();
 const userCtrl = require("../controllers/user.controller");
 const authCtrl = require("../controllers/auth.controller");
 const postCtrl = require('../controllers/post.controller');
+const profileCtrl = require("../controllers/profile.controller");
 
 // Timeline
-router.route('/api/posts/feed/:userId')
+router.route('/api/posts/feed/:profileId')
     .get(authCtrl.requireSignin, postCtrl.listNewsFeed)
 
 // Create Post
-router.route('/api/posts/new/:userId')
+router.route('/api/posts/new/:profileId')
     .post(authCtrl.requireSignin, postCtrl.create)
 
 // Profile
-router.route('/api/posts/by/:userId')
+router.route('/api/posts/by/:profileId')
     .get(authCtrl.requireSignin, postCtrl.listByUser)
 
 // Find Specific Post
@@ -38,5 +39,6 @@ router.route('/api/posts/uncomment')
 
 router.param('userId', userCtrl.userByID)
 router.param('postId', postCtrl.postByID)
+router.param('profileId', profileCtrl.profileByID)
 
 module.exports = router;

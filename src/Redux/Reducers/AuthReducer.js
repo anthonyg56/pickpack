@@ -1,9 +1,8 @@
 import Constants from "../Constants/Constants";
-import { stringLiteral } from "@babel/types";
 
 const initialState = {
   isAuthenticated: false,
-  token: stringLiteral,
+  token: null,
   user: {},
   loading: false
 };

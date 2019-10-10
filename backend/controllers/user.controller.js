@@ -10,15 +10,12 @@ const register = (req, res, next) => {
             } else {
                 const user = new User({
                     name: req.body.name,
-                    userName: req.body.userName,
                     email: req.body.email,
                     password: req.body.password
                 });
                 user.save().then(user => res.json(user)).catch(err => console.log(err))
             }
         })
-        /*.then(res => res.status(200).json({ message: "Successfully signed up!" }))
-        .catch(err => { res.status(400).json({ error: errorHandler.getErrorMessage(err) }) })*/
 };
 
 const list = (req, res) => { 
@@ -38,19 +35,19 @@ const userByID = (req, res, next, id) => {
           return res.status('400').json({
             error: "User not found"
           })
-        req.profile = user
+        req.user = user
         next()
     });
 };
 
 const read = (req, res) => { 
-    req.profile.hashed_password = undefined
-    req.profile.salt = undefined
-    return res.json(req.profile)
+    req.user.hashed_password = undefined
+    req.user.salt = undefined
+    return res.json(req.user)
 };
 
 const update = (req, res, next) => { 
-    let user = req.profile
+    let user = req.user
     user = _.extend(user, req.body)
     user.updated = Date.now()
     user.save((err) => {
@@ -66,7 +63,7 @@ const update = (req, res, next) => {
 };
 
 const remove = (req, res, next) => { 
-    let user = req.profile
+    let user = req.user
     user.remove((err, deletedUser) => {
         if (err) {
             return res.status(400).json({

@@ -29,7 +29,7 @@ const postByID = (req, res, next, id) => {
 };
 
 const listByUser = (req, res) => {
-    Post.find({postedBy: req.profile._id})
+    Post.find({postedBy: req.profile})
     .populate('comments', 'text created')
     .populate('comments.postedBy', '_id name')
     .populate('postedBy', '_id name')

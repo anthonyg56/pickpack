@@ -1,23 +1,23 @@
 import Constants from '../Constants/Constants';
 
-const updateSubNav = payload => {
+const updateSubNav = subNav => {
     return { 
         type: Constants.update.subNav, 
-        payload
+        payload: subNav
     }
 }
 
-const updateNavBar = payload => {
+const updateNavBar = navBar => {
     return { 
         type: Constants.update.navBar, 
-        payload
+        payload: navBar
     }
 }
 
-const updateTitle = payload => {
+const updateTitle = title => {
     return { 
         type: Constants.update.title, 
-        payload
+        payload: title
     }
 }
 

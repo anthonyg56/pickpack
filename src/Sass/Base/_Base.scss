@@ -29,15 +29,40 @@
                 background: $beige;
                 display: grid;
                 grid-template-rows: 8% 87% 5%;
+                overflow: hidden;
                 .Header{
                     display: grid;
-                    grid-template-columns: 20% 70% 10%;
-                    .Search-Bar{
+                    grid-template-columns: 20% 80%;
+                    .Title{
                         text-align: center;
-                        padding-top: 30px;
+                        padding-top: 20px;
+                        h2{
+                            margin: 0;
+                            font-family: $secondaryFont;
+                            letter-spacing: 1px;
+                            color: $red;
+                            font-size: 1.8em;
+                        }
                     }
                     .Sub-Nav{
-
+                        padding-top: 20px;
+                        padding-right: 25px;
+                        text-align: right;
+                        a{
+                            text-decoration: none;
+                            color: $black;
+                            margin-left: 25px;
+                            h2{
+                                margin: 0;
+                                display: inline-block;
+                                font-family: $secondaryFont;
+                                letter-spacing: 1px;
+                                font-size: 1.8em;
+                            }
+                        }
+                        .Active{
+                            color: $red;
+                        }
                     }
                     .Icon{
 

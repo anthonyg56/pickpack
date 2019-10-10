@@ -1,18 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateSubNav, updateTitle } from "../../Redux/Actions/Actions";
+import { updateSubNav, updateTitle } from "../../Redux/Actions/BaseActions";
+import {readProfile} from '../../Redux/Actions/ProfileActions';
 import { Notifications, PickList, QuickGraph, QuickLinks } from './DashboardComponents'
 
 const mapDispatchToProps = dispatch => {
     return {
         updateSubNav: subNav => dispatch(updateSubNav(subNav)),
-        updateTitle: title => dispatch(updateTitle(title))
+        updateTitle: title => dispatch(updateTitle(title)),
+        readProfile: (profile, token) => dispatch(readProfile(profile, token))
     };
 }
 
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
 class Dashboard extends React.Component {
     componentWillMount = () => {
+        const jwt = this.props.auth
+        console.log(jwt)
         this.props.updateTitle("My Dashboard");
+        this.props.readProfile(jwt.user._id, jwt.token)
     }
 
     render(){
@@ -35,4 +44,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -7,6 +7,7 @@ const userRouter = require("./routes/user.routes");
 const cookieParser = require("cookie-parser");
 const authRouter = require('./routes/auth.routes');
 const postRouter = require('./routes/post.routes');
+const profileRouter = require('./routes/profile.routes');
 
 // Express Setup
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors());
 app.use('/', userRouter);
 app.use('/', authRouter);
 app.use('/', postRouter);
+app.use('/', profileRouter);
 
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {

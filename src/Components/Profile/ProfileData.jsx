@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import PropTypes from "prop-types"
 import auth from '../Auth/AuthHelper'
 import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom"
+import { withRouter, NavLink } from "react-router-dom"
+import useForm from 'react-hook-form'
 import { postsByUser } from '../../Redux/Actions/PostActions'
 
 const ProfilePosts = props => {
@@ -34,7 +35,7 @@ const ProfileBar = props => {
     const { name, pic, bio, follower, following, reputation } = props;
     return(
         <div className="Profile-Bar">
-            <div className="Header">
+            <div className="Profile-Header">
                 <img src={pic} />
                 <h2>{name}</h2>
                 <p>{bio}</p>
@@ -72,9 +73,12 @@ const ProfileTabs = props => {
 }
 
 const ProfileContent = props => {
-    const { content } = props
+    const { content, newPosts } = props
     return(
         <div className="User-Content">
+            <div className="New-Post">
+                {newPosts}
+            </div>
             { content }
         </div>
     )
@@ -93,10 +97,9 @@ const Post = props => {
             <div id="Post-User">
                 {/*<img />*/}
                 <h4>{props.name}</h4>
+                <p>{/* Comments */}</p>
+                <p>{/* Likes */}</p>
             </div>
-            {/*<div>
-                //Comments & Likes
-            </div>*/}
         </div>
     )
 }
@@ -112,6 +115,25 @@ const Pick = props => {
 const Stat = props => {
 
 }
+
+const NewPost = props => {
+    const { register, handleSubmit } = useForm()
+    const onSubmit = data => props.newPost(data)
+    return(
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input id="text" placeholder="Share Your Wisdom.." name="text" ref={register({ required: true })} />
+            <input id="submit" type="submit" />
+        </form>
+    )
+}
+
+const SubNav = () => 
+    <div className="Profile-Sub-Nav">
+        <NavLink to="/timeline" activeClassName="Active"><h2>Timeline</h2></NavLink>
+        <NavLink to="/profile" activeClassName="Active"><h2>My Profile</h2></NavLink>
+        <NavLink to="/messages" activeClassName="Active"><h2>Messages</h2></NavLink>
+    </div>
+
 
 Post.propType = {
     name: PropTypes.string.isRequired,
@@ -132,8 +154,10 @@ export {
     ProfileTabs,
     ProfileBar,
     Comment,
+    NewPost,
+    SubNav,
     Liked,
     Post,
     Pick,
-    Stat
+    Stat,
 }

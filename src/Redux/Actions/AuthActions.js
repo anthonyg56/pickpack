@@ -6,7 +6,8 @@ const registerUser = (userData, history) => dispatch => {
   axios
   .post("/api/register", userData)
   .then(res => {
-    history.push("/auth/login")
+    dispatch(setCurrentUser(res.data))
+    history.push('/register/profile')
   }) // re-direct to login on successful register
   .catch(err =>
     dispatch({
@@ -20,10 +21,8 @@ const loginUser = userData => dispatch => {
     axios
     .post("/api/auth/signin", userData)
     .then(res => {
-      console.log(res.data)
-      const { token } = res.data;
       sessionStorage.setItem('jwt', JSON.stringify(res.data))
-      setAuthToken(token);
+      dispatch(getToken(res.data.token))
       dispatch(setCurrentUser(res.data.user))
       dispatch(updateAuthentication(true))
     })
@@ -33,6 +32,13 @@ const loginUser = userData => dispatch => {
         payload: err.response.data
       })
     )
+}
+
+const getToken = token => {
+  return {
+    type: Constants.get.token,
+    payload: token
+  }
 }
 
 const setCurrentUser = decoded => {
@@ -72,5 +78,6 @@ export {
   loginUser,
   setCurrentUser,
   setUserLoading,
-  logoutUser
+  logoutUser,
+  getToken
 }

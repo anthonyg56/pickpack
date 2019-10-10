@@ -81,7 +81,7 @@ const JoinToday = () =>
 
 export const LoginRegisterLink = () => 
     <div className="Login-Register-Link">
-        <NavLink to="/auth/login">Login/Register</NavLink>
+        <NavLink to="/login">Login/Register</NavLink>
     </div>
 
 export const LandingNav = props => 

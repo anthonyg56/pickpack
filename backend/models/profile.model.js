@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");
 const Schema = mongoose.Schema();
 
-const ProfileSchema = new Schema({
+const ProfileSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
   userName: {
     type: String,
     trim: true,
@@ -29,11 +33,28 @@ const ProfileSchema = new Schema({
       ref: "User"
     }
   ],
+  posts: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Post"
+    }
+  ],
+  picks: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Pick"
+    }
+  ],
   favoriteTeams: [String],
   favoriteSport: [String],
-  likes: [Number]
+  likes: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: ["Pick", "Post"]
+    }
+  ]
 });
 
-const Profile = mongoose.model('profile', ProfileSchema);
+const Profile = mongoose.model('Profile', ProfileSchema);
 
 module.exports = Profile;

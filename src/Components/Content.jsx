@@ -13,12 +13,12 @@ import About from './About/About';
 const Body = () => 
     <div className="Body">
         <Switch>
-            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
-            <Route path="/dashboard/profile" render={props => <Profile {...props} />} />
-            <Route path="/dashboard/odds" render={props => <Odds {...props} />} />
-            <Route path="/dashboard/community" render={props => <Community {...props} />} />
-            <Route path="/dashboard/premium" render={props => <Premium {...props} />} />
-            <Route path="/dashboard/about" render={props => <About {...props} />} />
+            <Route path="/dashboard" render={props => <Dashboard {...props} />} />
+            <Route path="/profile" render={props => <Profile {...props} />} />
+            <Route path="/odds" render={props => <Odds {...props} />} />
+            <Route path="/community" render={props => <Community {...props} />} />
+            <Route path="/premium" render={props => <Premium {...props} />} />
+            <Route path="/about" render={props => <About {...props} />} />
         </Switch>
     </div>
 

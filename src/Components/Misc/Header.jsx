@@ -1,22 +1,17 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-const mapStateToProps = state => {
-    return {
-      SubNav: state.SubNav
-    }
-}
+const mapStateToProps = state => ({
+      base: state.base
+})
 
-const Header = ({ SubNav }) => 
+const Header = props => 
     <div className="Header">
-        <div className="Search-Bar">
-            <input />
+        <div className="Title">
+            <h2>{props.base.title}</h2>
         </div>
         <div className="Sub-Nav">
-            {SubNav}
-        </div>
-        <div className="Icon">
-        
+            {props.base.subNav}
         </div>
     </div>
 
