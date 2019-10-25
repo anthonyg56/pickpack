@@ -1,30 +1,30 @@
-import Constants from "../Constants/Constants";
+import AuthConstants from "../Constants/AuthConstants"
 
 const initialState = {
   isAuthenticated: false,
   token: null,
   user: {},
   loading: false
-};
+}
 
-export default function(state = initialState, action) {
+const AuthReducer = (state = initialState, action) => {
     switch (action.type) {
-      case Constants.get.token:
+      case AuthConstants.getToken:
         return {
           ...state,
           token: action.payload
         };
-      case Constants.update.userLoading:
+      case AuthConstants.updateUserLoading:
         return {
           ...state,
           loading: true
         };
-      case Constants.get.currentUser:
+      case AuthConstants.getCurrentUser:
         return {
           ...state,
           user: action.payload
         };
-      case Constants.update.authentication:
+      case AuthConstants.updateAuthentication:
         return {
           ...state,
           isAuthenticated: action.payload
@@ -33,3 +33,5 @@ export default function(state = initialState, action) {
         return state;
     }
 }
+
+export default AuthReducer

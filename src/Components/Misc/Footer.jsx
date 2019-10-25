@@ -1,13 +1,6 @@
 import React from 'react';
-import { connect } from "react-redux";
 
-const mapStateToProps = state => {
-    return {
-      Name: state.Name
-    }
-}
-
-const Footer = ({ Name }) => 
+const Footer = () => 
     <div className="Footer">
         <div className="Social-Media">
         
@@ -16,8 +9,8 @@ const Footer = ({ Name }) =>
         
         </div>
         <div className="Title">
-            <h4>{Name}</h4>
+            <h4></h4>
         </div>
     </div>
 
-export default connect(mapStateToProps)(Footer)
+export default Footer

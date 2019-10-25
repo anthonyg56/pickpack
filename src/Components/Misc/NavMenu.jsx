@@ -1,7 +1,5 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { connect } from 'react-redux';
-import {updateNavBar} from '../../Redux/Actions/BaseActions';
 
 import ProfileIcon from '../../Img/Icons/Misc/Nav/profile.png';
 import AnalysisIcon from '../../Img/Icons/Misc/Nav/graph.png';
@@ -15,11 +13,11 @@ import OpenIcon from '../../Img/Icons/Misc/Nav/menu-outline.png';
 
 const NavMenuItems = props => 
     <div className="Nav-Menu-Items">
-        <NavLink to="/profile" activeClassName="Active" className="Nav-Icon" id="Profile">
+        <NavLink to="/dashboard" activeClassName="Active" className="Nav-Icon" id="Profile">
             <img src={ProfileIcon} alt="profile-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>Profile</p>
         </NavLink>
-        <NavLink to="/in-depth-analysis" activeClassName="Active" className="Nav-Icon" id="Analysis">
+        <NavLink to="/timeline" activeClassName="Active" className="Nav-Icon" id="Analysis">
             <img src={AnalysisIcon} alt="analysis-icon" />
             <p style={{display: props.isOpen === true ? "inline-block" : "none"}}>In Depth Analysis</p>
         </NavLink>
@@ -60,16 +58,5 @@ const NavMenu = ({ NavOpen, updateNavBar }) => {
     )
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-      updateNavBar: navBar => dispatch(updateNavBar(navBar))
-    };
-}
 
-const mapStateToProps = state => {
-    return {
-      NavOpen: state.NavOpen
-    }
-  }
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavMenu);
+export default NavMenu;

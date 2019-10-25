@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
+import AuthApi from '../../Api/AuthApi'
+import ProfileApi from '../../Api/ProfileApi'
 import useForm from 'react-hook-form'
 import { Link } from "react-router-dom"
-import PropTypes from 'prop-types'
 
 const RegisterUser = ({...props}) => {
     const { register, handleSubmit } = useForm()
-    const onSubmit = data => props.registerUser(data, props.history)
+    const onSubmit = data => AuthApi.registerUser(data, props.history)
     return(
         <div className="Register-User">
             <div className="Header">
@@ -99,9 +100,8 @@ const RegisterProfile = ({...props}) => {
             birthday: data.birthday,
             bio: data.bio
         }
-        props.createProfile(profileData, props.history)
+        ProfileApi.createProfile(profileData, props.history)
     }
-
     return(
         <div className="Auth-Form Register-Profile">
             <div className="Header">
@@ -156,55 +156,7 @@ const RegisterProfile = ({...props}) => {
         </div>
     )
 }
-
-const LoginUser = props => {
-    const { register, handleSubmit } = useForm()
-    const onSubmit = data => props.loginUser(data)
-    return(
-        <div className="Auth-Form Login-Form">
-            <div className="Form-Header">
-                <h4>
-                    <b>Login</b>
-                </h4>
-            </div>
-            <div className="Form">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input 
-                        placeholder="Email"
-                        name="email"
-                        ref={register({
-                            required: "email required"
-                        })}
-                    />
-                    <br/>
-                    <input 
-                        placeholder="Password"
-                        name="password"
-                        ref={
-                            register({
-                                required: "password required"
-                            })
-                        }
-                    />
-                    <br />
-                    <input id="submit" type="submit" placeholder="Create Profile"/>
-                </form>
-                <p className="">
-                    Don't have an account? <Link to="/register/user">Register</Link>
-                </p>
-                <Link to="/" className="">Back to home</Link>
-            </div>
-            
-        </div>
-    )
-}
-
-LoginUser.propTypes = {
-    loginUser: PropTypes.func.isRequired
-}
-
 export {
     RegisterProfile,
-    LoginUser,
     RegisterUser
 }

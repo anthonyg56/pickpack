@@ -1,124 +1,73 @@
-import React, { Component } from "react"
+import React, {useEffect} from "react"
+import AuthApi from '../../Api/AuthApi'
+import useAuth from '../../Hooks/useAuth'
+import useForm from 'react-hook-form'
 import { Link } from "react-router-dom"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { loginUser } from "../../Redux/Actions/AuthActions"
-import { LoginUser } from './AuthComponents'
-import auth from './AuthHelper'
-import classnames from "classnames"
 import background from '../../Img/Backgrounds/Auth/auth.jpeg'
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-})
+import ProfileApi from "../../Api/ProfileApi"
+import useProfile from "../../Hooks/useProfile"
 
-class Login extends Component {
-    state = {
-        errors: {}
+const Login = ({...props}) => {
+    const { register, handleSubmit } = useForm()
+    const [{auth}, setAuth] = useAuth()
+    const {loginUser} = AuthApi()
+    const [, setProfile] = useProfile()
+    const onSubmit = data => (async () => {
+        const response = await loginUser(data)
+        setAuth(response, true)
+    })()
+
+    const readProfile = async () => {
+        const response = await ProfileApi.read(auth.user._id, auth.token)
+        setProfile(response)
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (auth.isAuthenticated()) {
-          this.props.history.push("/dashboard");
+    useEffect(() => {
+        if(auth.isAuthenticated === true){
+            readProfile()
+            props.history.push('/profile')
         }
-        console.log(nextProps.errors)
-        if (nextProps.errors) {
-          this.setState({
-            errors: nextProps.errors
-          });
-        }
-    }
-
-    componentDidMount() {
-        const isAuth = auth.isAuthenticated()
-        // If logged in and user navigates to Login page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }
-    }
-
-    render() {
-        const { errors } = this.state;
-    return (
+    }, [auth.isAuthenticated])
+    return(
         <div className="Auth" style={{backgroundImage: 'url(' + background + ')'}}>
             <div className="Login">
-                <LoginUser loginUser={data => this.props.loginUser(data)} />
-                {/*<div  className="">
-                <div className="">
-                    <Link to="/" className="">Back to home</Link>
-                    <div className="">
-                    <h4>
-                        <b>Login</b> below
-                    </h4>
-                    <p className="">
-                        Don't have an account? <Link to="/auth/register/user">Register</Link>
-                    </p>
+                <div className="Auth-Form Login-Form">
+                    <div className="Form-Header">
+                        <h4>
+                            <b>Login</b>
+                        </h4>
                     </div>
-                    <form noValidate onSubmit={this.onSubmit}>
-                    <div className="">
-                        <input
-                        onChange={this.onChange}
-                        value={this.state.email}
-                        error={errors.email}
-                        id="email"
-                        type="email"
-                        className={classnames("", {
-                            invalid: errors.email || errors.emailnotfound
-                        })}
-                        />
-                        <label htmlFor="email">Email</label>
-                        <span className="red-text">
-                            {errors.email}
-                            {errors.emailnotfound}
-                        </span>
+                    <div className="Form">
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input 
+                                placeholder="Email"
+                                name="email"
+                                ref={register({
+                                    required: "email required"
+                                })}
+                            />
+                            <br/>
+                            <input 
+                                placeholder="Password"
+                                name="password"
+                                ref={
+                                    register({
+                                        required: "password required"
+                                    })
+                                }
+                            />
+                            <br />
+                            <input id="submit" type="submit" placeholder="Create Profile"/>
+                        </form>
+                        <p className="">
+                            Don't have an account? <Link to="/register/user">Register</Link>
+                        </p>
+                        <Link to="/" className="">Back to home</Link>
                     </div>
-                    <div className="">
-                        <input
-                        onChange={this.onChange}
-                        value={this.state.password}
-                        error={errors.password}
-                        id="password"
-                        type="password"
-                        className={classnames("", {
-                            invalid: errors.password || errors.passwordincorrect
-                        })}
-                        />
-                        <label htmlFor="password">Password</label>
-                        <span className="red-text">
-                            {errors.password}
-                            {errors.passwordincorrect}
-                        </span>
-                    </div>
-                    <div className="" >
-                        <button
-                        style={{
-                            width: "150px",
-                            borderRadius: "3px",
-                            letterSpacing: "1.5px",
-                            marginTop: "1rem"
-                        }}
-                        type="submit"
-                        className=""
-                        >
-                        Login
-                        </button>
-                    </div>
-                    </form>
                 </div>
-                    </div>*/}
             </div>
         </div>
-        );
-    }
+    )
 }
 
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-};
-
-export default connect(
-    mapStateToProps,
-    { loginUser }
-  )(Login);
+export default Login;

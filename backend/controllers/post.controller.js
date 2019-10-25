@@ -4,7 +4,8 @@ const errorHandler = require('../helpers/error.helper');
 const create = (req, res, next) => {
   let post = new Post({
     text: req.body.text,
-    postedBy: req.profile
+    postedBy: req.auth,
+    profile: req.profile._id
   })
   console.log(post)
   post.save((err, result) => {
@@ -29,7 +30,7 @@ const postByID = (req, res, next, id) => {
 };
 
 const listByUser = (req, res) => {
-    Post.find({postedBy: req.profile})
+    Post.find({profile: req.profile})
     .populate('comments', 'text created')
     .populate('comments.postedBy', '_id name')
     .populate('postedBy', '_id name')
@@ -42,6 +43,22 @@ const listByUser = (req, res) => {
       }
       res.json(posts)
     })
+};
+
+const likesByUser = (req, res) => {
+  Post.find({likes: req.profile})
+  .populate('comments', 'text created')
+  .populate('comments.postedBy', '_id name')
+  .populate('postedBy', '_id name')
+  .sort('-created')
+  .exec((err, posts) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(posts)
+  })
 };
 
 const listNewsFeed = (req, res) => {
@@ -74,8 +91,8 @@ const remove = (req, res) => {
       })
 };
 
-const like = (req, res) => {
-    Post.findByIdAndUpdate(req.body.postId, {$push: {likes: req.body.userId}}, {new: true})
+const like = (req, res, next) => {
+    Post.findByIdAndUpdate(req.body.post, {$push: {likes: req.body.user}}, {new: true})
     .exec((err, result) => {
       if (err) {
         return res.status(400).json({
@@ -87,9 +104,10 @@ const like = (req, res) => {
 };
 
 const unlike = (req, res) => {
-    Post.findByIdAndUpdate(req.body.postId, {$pull: {likes: req.body.userId}}, {new: true})
+    Post.findByIdAndUpdate(req.body.post, {$pull: {likes: req.body.user}}, {new: true})
     .exec((err, result) => {
       if (err) {
+        console.log('yup, isPoster is the')
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
@@ -132,10 +150,12 @@ const uncomment = (req, res) => {
 const isPoster = (req, res, next) => {
     let isPoster = req.post && req.auth && req.post.postedBy._id == req.auth._id
     if(!isPoster){
+      console.log('yup, isPoster is the issue')
       return res.status('403').json({
         error: "User is not authorized"
       })
     }
+    console.log('user authorized')
     next()
 };
 
@@ -143,6 +163,7 @@ module.exports = {
     create,
     postByID, 
     listByUser, 
+    likesByUser,
     listNewsFeed, 
     remove, 
     like, 

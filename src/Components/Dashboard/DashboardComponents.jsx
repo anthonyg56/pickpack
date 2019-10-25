@@ -9,15 +9,14 @@ export const Notifications = props => {
     )
 }
 
-export const NotificationItem = props => {
-
-    return (
+export const NotificationItem = () => {
+    return(
         <div className="Notification-Item">
             <div className="Title">
-                <h4>{props.titles}</h4>
+                <h4></h4>
             </div>
             <div className="Notification">
-                <p>{props.text}</p>
+                <p></p>
             </div>
         </div>
     )

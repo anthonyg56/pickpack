@@ -1,20 +1,48 @@
-import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
-import store from "./Redux/Store/Store";
-import { BrowserRouter as Router} from "react-router-dom";
-import App from "./App.jsx";
-import './Sass/Index.scss';
+import React from "react"
+import ReactDOM from "react-dom"
+import { BrowserRouter as Router} from "react-router-dom"
+import App from "./App.jsx"
+import {Provider} from './Store'
+import './Sass/Index.scss'
 
-// if you're in create-react-app import the files as:
-// import store from "./js/store/index";
-// import App from "./js/components/App.jsx";
+const initialState = {
+  profile: {
+    _id: null,
+    userName: null,
+    bio: null,
+    birthday: null,
+    posts: null,
+    picks: [],
+    stats: [],
+    likes: [],
+    comments: []
+  },
+  auth: {
+    token: null,
+    user: {},
+    isAuthenticated: false,
+    loading: false
+  },
+  misc: {
+    errors: null,
+    subNav: null,
+    title: null,
+    isNavOpen: false
+  },
+  post: {
+    _id: null,
+    poster: null,
+    text: null,
+    likes: null,
+    comments: null
+  }
+}
 
-render(
-  <Provider store={store}>
-    <Router basename="">
-        <App />
-    </Router>
-  </Provider>,
+ReactDOM.render(
+  <Router basename="">
+    <Provider initialValue={initialState} >
+      <App />
+    </Provider>
+  </Router>,
   document.getElementById("root")
 );

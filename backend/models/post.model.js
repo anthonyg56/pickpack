@@ -11,7 +11,7 @@ const PostSchema = new mongoose.Schema({
     },
     likes: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'User'
+        ref: 'Profile'
     }],
     comments: [{
         text: String,
@@ -21,12 +21,16 @@ const PostSchema = new mongoose.Schema({
         },
         postedBy: { 
             type: mongoose.Schema.ObjectId, 
-            ref: 'User'
+            ref: 'Profile'
         }
     }],
     postedBy: {
         type: mongoose.Schema.ObjectId, 
         ref: 'User'
+    },
+    profile: {
+        type: mongoose.Schema.ObjectId, 
+        ref: 'Profile'
     },
     created: {
         type: Date,

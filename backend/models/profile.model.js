@@ -24,13 +24,13 @@ const ProfileSchema = new mongoose.Schema({
   followers: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "User"
+      ref: "Profile"
     }
   ],
   followings: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "User"
+      ref: "Profile"
     }
   ],
   posts: [

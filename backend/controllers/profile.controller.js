@@ -30,10 +30,62 @@ const profileByID = (req, res, next, id) => {
     });
 };
 
+const addLike = (req, res) => {
+    Profile.findByIdAndUpdate(req.body.user, {$push: {likes: req.body.post}}, {new: true})
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result)
+    })
+}
+
+const deleteLike = (req, res) => {
+    Profile.findByIdAndUpdate(req.body.user, {$pull: {likes: req.body.post}}, {new: true})
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result)
+    })
+}
+
+const addPost = (req, res) => {
+    Profile.findByIdAndUpdate(req.body.user, {$push: {posts: req.body.post}}, {new: true})
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result)
+    })
+}
+
+const deletePost = (req, res) => {
+    Profile.findByIdAndUpdate(req.body.user, {$pull: {posts: req.body.post}}, {new: true})
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result)
+    })
+}
+
 const read = (req, res) => res.json(req.profile)
 
 module.exports = {
     read,
     create,
-    profileByID
+    profileByID,
+    addPost,
+    deletePost,
+    addLike,
+    deleteLike
 }

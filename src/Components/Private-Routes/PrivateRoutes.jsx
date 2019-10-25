@@ -1,27 +1,20 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from "react"
+import useAuth from '../../Hooks/useAuth'
+import { Route, Redirect } from "react-router-dom"
+import Content from '../Content'
+import useProfile from "../../Hooks/useProfile"
+import ProfileApi from "../../Api/ProfileApi"
 
-const PrivateRoute = ({ Component: Component, auth, ...rest }) => (
-  <Route
+const PrivateRoute = ({ ...rest }) => {
+  const [{auth}] = useAuth()
+  return <Route
     {...rest}
     render={props =>
-      auth.isAuthenticated === true ? (
-        <Component {...props} />
-      ) : (
+      auth.isAuthenticated === true ? 
+        <Content {...props} />
+       : 
         <Redirect to="/login" />
-      )
     }
   />
-);
-
-PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(PrivateRoute);
+  }
+export default PrivateRoute;

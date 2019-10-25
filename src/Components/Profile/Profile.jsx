@@ -1,108 +1,59 @@
-import React from 'react';
-import auth from '../Auth/AuthHelper'
-import PropTypes from 'prop-types'
-import { ProfileComments, NewPost, ProfileContent, ProfilePosts, ProfileLikes, ProfilePicks, ProfileStats, ProfileTabs, ProfileBar, Comment, Liked, Post, Pick, Stat, SubNav } from './ProfileData'
-import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom"
-import { postsByUser, createPost } from '../../Redux/Actions/PostActions'
-import { readProfile } from '../../Redux/Actions/ProfileActions'
-import {updateTitle, updateSubNav} from '../../Redux/Actions/BaseActions'
+import React from 'react'
+import Posts from './Posts'
+import Stats from './Stats'
+import Picks from './Picks'
+import Likes from './Likes'
+import Comments from './Comments'
+import {Route, NavLink} from 'react-router-dom'
+import useAuth from '../../Hooks/useAuth'
+import useProfile from '../../Hooks/useProfile'
 import ProfilePic from '../../Img/Profile Pics/profilePic2.jpg'
 
-const mapStateToProps = state => ({
-    profile: state.profile,
-    auth: state.auth,
-    errors: state.errors
-})
-
-class Profile extends React.Component {
-    state = {
-        posts: []
-    }
-
-    NewPost = data => {
-        const jwt = this.props.auth
-        let post = this.state.posts
-        this.props.createPost({ 
-            userId: jwt.user._id
-        }, {
-            post: data 
-        }, {
-            t: jwt.token
-        }).then(data => this.UpdatePosts(data))
-    }
-
-    UpdatePosts = data => {
-        let post = <Post name={this.props.auth.user.name} text={data.text} />
-        let updatedPosts = this.state.posts
-        updatedPosts.unshift(post)
-        this.setState({posts: updatedPosts})
-    }
-
-    Posts = data => {
-        console.log(data);
-        let posts = data.map((item, key) => {
-            console.log(item.text)
-            return <Post name={this.props.auth.user.name} text={item.text} key={key} />
-        });
-        return posts
-    }
-
-    UNSAFE_componentWillMount = () => {
-        const jwt = this.props.auth
-        this.props.postsByUser(jwt.user._id, jwt.token)
-        .then((data) => this.setState({posts: this.Posts(data)}))
-        this.props.updateSubNav(<SubNav />)
-        this.props.updateTitle('@' + this.props.profile.general.userName + ' Profile')
-    }
-
-    render(){
-        return(
-            <div className="Profile">
-                <ProfileBar 
-                    pic={ProfilePic} 
-                    name={this.props.auth.user.name} 
-                    bio={this.props.profile.general.bio} 
-                />
-                <div className="Profile-Content">
-                    <ProfileTabs />
-                    <ProfileContent
-                        newPosts={
-                            <NewPost newPost={
-                                    data => this.NewPost(data)
-                                } 
-                            />
-                        }
-                        content={
-                            <ProfilePosts 
-                                posts={
-                                    this.state.posts
-                                } 
-                            />
-                        } 
-                    />
+const Profile = () => {
+    const [{profile}] = useProfile()
+    const [{auth}] = useAuth()
+    return(
+        <div className="Profile">
+            <div className="Profile-Bar">
+                <div className="Profile-Header">
+                        <img src={ProfilePic} alt="profile pic"/>
+                        <h2>{auth.user.name}</h2>
+                        <p>{profile.bio}</p>
+                    </div>
+                    <div className="Body">
+                        <h3>{}</h3>
+                        <h3>{}</h3>
+                        <h3>{}</h3>
                 </div>
             </div>
-        );
-    }
+            <div className="Profile-Content">
+                <div className="Tabs">
+                    <div className="Tab-Item" id="Posts">
+                        <h2><NavLink to="/profile">Posts</NavLink></h2>
+                    </div>
+                    <div className="Tab-Item" id="Picks">
+                        <h2><NavLink to="/profile/picks">Picks</NavLink></h2>
+                    </div>
+                    <div className="Tab-Item" id="Stats">
+                        <h2><NavLink to="/profile/stats">Stats</NavLink></h2>
+                    </div>
+                    <div className="Tab-Item" id="Likes">
+                        <h2><NavLink to="/profile/likes">Likes</NavLink></h2>
+                    </div>
+                    <div className="Tab-Item" id="All-Activity">
+                        <h2><NavLink to="/profile/comment">Comment</NavLink></h2>
+                    </div>
+                </div>
+                <div className="User-Content">
+                    <Route exact path="/profile" component={props => <Posts {...props} />} />
+                    <Route path="/profile/picks" component={props => <Picks {...props} />} />
+                    <Route path="/profile/stats" component={props => <Stats {...props} />} />
+                    <Route path="/profile/likes" component={props => <Likes {...props} />} />
+                    <Route path="/profile/comments" component={props => <Comments {...props} />} />
+                </div>
+            </div>
+        </div>
+    );
 }
 
-Profile.propTypes = {
-    profile: PropTypes.object.isRequired,
-    postsByUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    readProfile: PropTypes.func.isRequired,
-    createPost: PropTypes.func.isRequired
-}
-
-export default connect( 
-    mapStateToProps, 
-    { 
-        postsByUser,
-        readProfile,
-        updateTitle,
-        updateSubNav,
-        createPost
-    })
-    (withRouter(Profile));
+export default Profile;

@@ -1,54 +1,55 @@
-import Constants from '../Constants/Constants'
-import {setCurrentUser} from './AuthActions'
-import axios from 'axios'
+import ProfileConstants from '../Constants/ProfileConstants'
 
-const createProfile = (profileData, history) => dispatch => {
-    axios
-    .post('/api/profile/new', profileData)
-    .then(res => {
-        console.log(res)
-        let resetUser = null
-        dispatch(setCurrentUser(resetUser))
-        resetUser = {}
-        dispatch(setCurrentUser(resetUser))
-        history.push('/login')
-    })
-    .catch(err => 
-        dispatch({
-            type: Constants.get.errors,
-            payload: err.response.data
-        })
-    )
-}
-
-const readProfile = (profile, token) => dispatch => {
-    axios
-    .get('/api/profile/' + profile, { headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-    }})
-    .then(res => {
-        console.log(res.data)
-        dispatch(setProfile(res.data))
-    })
-    .catch(err =>
-        dispatch({
-          type: Constants.get.errors,
-          payload: err
-        })
-    )
-}
-
-const setProfile = profile => {
-    return {
-        type: Constants.create.profile,
-        payload: profile
+const ProfileActions = {
+    getProfile: (id, userName, authId, bio, birthday) => {
+        const profile = {
+            id: id,
+            userName: userName,
+            authId: authId,
+            bio: bio,
+            birthday: birthday
+        }
+        return {
+            type: ProfileConstants.getProfile,
+            payload: profile
+        }
+    },
+    getPosts: posts => {
+        return {
+            type: ProfileConstants.getPost,
+            payload: posts
+        }
+    },
+    getPicks: picks => {
+        return {
+            type: ProfileConstants.getPicks,
+            payload: picks
+        }
+    },
+    getLikes: likes => {
+        return {
+            type: ProfileConstants.getLikes,
+            payload: likes
+        }
+    },
+    getComments: comments => {
+        return {
+            type: ProfileConstants.getComments,
+            payload: comments
+        }
+    },
+    getFollowers: followers => {
+        return {
+            type: ProfileConstants.getFollowers,
+            payload: followers
+        }
+    },
+    getFollowing: following => {
+        return {
+            type: ProfileConstants.getFollowing,
+            payload: following
+        }
     }
 }
 
-export {
-    createProfile,
-    readProfile,
-    setProfile
-}
+export default ProfileActions

@@ -1,0 +1,60 @@
+.Post{
+    background: $white;
+    text-align: left;
+    border-bottom: solid grey 1px;
+    #Text{
+        font-family: $secondaryFont;
+        letter-spacing: 1px;
+    }
+    #Post-User{
+        letter-spacing: 1px;
+        display: grid;
+        grid-template-columns: 90% 5% 5%;
+        h4{
+            margin: 5px 0px;
+            font-family: $primaryFont;
+            font-weight: 500;
+            color: $red;
+            display: inline-block;
+            font-size: 1.2em;
+        }
+        p{
+            display: inline-block;
+            margin: 0;
+            
+        }
+    }
+}
+
+.New-Post{
+    padding: 25px 0;
+    form{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 90% 10%;
+        input{
+            border-right: none;
+            border-left: none;
+            border-top: none;
+        }
+        #text{
+            font-family: $secondaryFont;
+            color: $red;
+            font-size: 25px;
+            letter-spacing: 1px;
+        }
+        #text::placeholder{
+            font-family: $secondaryFont;
+            font-size: 25px;
+            letter-spacing: 1px;
+        }
+        #submit{
+            background: $red;
+            border: none;
+            color: $white;
+            font-family: $primaryFont;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+    }
+}

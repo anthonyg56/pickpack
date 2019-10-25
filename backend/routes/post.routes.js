@@ -17,6 +17,10 @@ router.route('/api/posts/new/:profileId')
 router.route('/api/posts/by/:profileId')
     .get(authCtrl.requireSignin, postCtrl.listByUser)
 
+// Likes
+router.route('/api/posts/likes/:profileId')
+    .get(authCtrl.requireSignin, postCtrl.likesByUser)
+
 // Find Specific Post
 router.route('/api/posts/:postId')
     .delete(authCtrl.requireSignin, postCtrl.isPoster, postCtrl.remove)
